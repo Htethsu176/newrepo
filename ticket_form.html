@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Ticket Form</title>
+    <link rel="stylesheet" href="form_style.css" /> 
+</head>
+<body>
+    <h1>Request Ticket Form</h1><br>
+    <div class="container">
+        <form action="#">
+            <fieldset>
+                <div class="form">
+                    <div class="field">
+                        <span class="details" style="font-size: 18px;">Full Name: </span><br>
+                        <input tpye="text" name="firstname" placeholder="Firstname" sizes="15" required><br><br>
+                        <input tpye="text" name="lastname" placeholder="Lastname" size="15" ><br><br>
+    
+                        <span class="details" style="font-size: 18px;">Customer Id: </span><br>
+                        <input name="customerId" id="customerId" placeholder="163791" pattern="[0-9]{6}" size="15" required><br><br>
+
+                        <span class="details" style="font-size: 18px;">Phone No: </span><br>
+                        <input type="text" name="country code"  value="+95" size="2" required>   
+                        <input type="text" id="phones" name="phones" placeholder="948-4823" pattern="[0-9]{3}[0-9]{4}" size="15" required><br><br>
+
+                        <span class="details" style="font-size: 18px;">Location: </span><br>
+                        <select>
+                            <option value="City A" selected> City A </option>
+                            <option value="City B"> City B </option>
+                            <option value="City C"> City C </option>
+                            <option value="City D"> City D </option>
+                            <option value="City E"> City E </option>
+                            <option value="City F"> City F </option>
+                        </select required><br><br>
+                        <textarea cols="80" rows="3" value="address" placeholder="Details of address..." size="15" required></textarea><br><br>
+
+                        <span class="details" style="font-size: 18px;">Date of request: </span><br>
+                        <input type="date" name="date" required><br><br>
+
+                        <span class="details" style="font-size: 18px;">Issue: </span><br>
+                        <textarea cols="80" rows="5" value="issue" placeholder="Enter text here..." required></textarea><br><br>
+                    </div>
+                </div>
+                </fieldset><br>
+
+                <div class="buttons">
+                    <button type="reset">Clear form</button>
+                    <button type="submit" id="myBtn" class="submit" onclick="location.href='http:localhost:8080/view_page.html'">Submit</button>
+                </div>
+        </form>
+    </div>
+</body>
+</html>

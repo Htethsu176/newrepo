@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request Ticket List</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <h1>Customer Request Ticket List</h1><br>
+    <i class="fa fa-search"></i>
+    <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search for names...">
+    
+    <label>Sort by: </label>
+    <select id="select" class="select" onchange="filterTable()">
+        <option value="all" selected>All</option>
+        <option value="new">New</option>
+        <option value="in progress">In progress</option>
+        <option value="resolve">Resolve</option>
+    </select>
+    <button id="sortButton" onclick="sortTable()">Sort by Id</button>
+    <br><br>
+
+    <table id="data-table">
+        <thead>
+            <tr> 
+                <th>No</th>
+                <th>Name</th>
+                <th>Custome Id</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Phone No</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table><br>
+
+    <a href="ticket_form.html">Add new data</a>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function(){
+            fetch("data.json")
+            .then(response => response.json())
+            .then(data => {
+                createTable(data);
+
+                document.getElementById('myInput').addEventListener('keyup', function() {
+                searchTable(data);
+                    
+                });
+
+                document.getElementById('select').addEventListener('change', function() {
+                filterTable(data);
+
+                document.getElementById('sortButton').addEventListener('click',function(){
+                sortTable(data);    
+                });
+
+    
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:',error);
+            });
+
+            function createTable(data){
+                const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                
+                data.forEach(item => {
+                    const row = tableBody.insertRow();
+
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    const cell3 = row.insertCell(2);
+                    const cell4 = row.insertCell(3);
+                    const cell5 = row.insertCell(4);
+                    const cell6 = row.insertCell(5);
+                    const cell7 = row.insertCell(6);
+
+                    cell1.textContent = item.no;
+                    cell2.textContent = item.name;
+                    cell3.textContent = item.id;
+                    cell4.textContent = item.location;
+                    cell5.textContent = item.date;
+                    cell6.textContent = item.status;
+                    cell7.textContent = item.phone;
+                });
+            }
+
+            function searchTable(data) {
+                const searchInput = document.getElementById('myInput').value.toLowerCase();
+                const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                if(event.key === 'Enter'){
+                    
+                    const filteredData = data.filter(item => 
+            
+                        item.name.toLowerCase().includes(searchInput));
+                
+                    tableBody.innerHTML = '';
+                    createTable(filteredData);
+                }
+            };
+
+            function filterTable(data) {
+                const selectedStatus = document.getElementById('select').value.toLowerCase();
+                const searchInput = document.getElementById('myInput').value.toLowerCase();
+                const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                const filteredData = data.filter(item =>
+                    item.status.toLowerCase() === selectedStatus &&
+                    item.name.toLowerCase().includes(searchInput));
+
+                if (selectedStatus === 'all') {
+
+                    tableBody.innerHTML = '';
+                    createTable(data);
+                    
+                } else {
+
+                    tableBody.innerHTML = '';
+                    createTable(filteredData);
+                
+                }
+            };
+
+            function sortTable(data) {
+                const tableBody = document.getElementById('data-table').getElementsByTagName('tbody')[0];
+                const sortedData = data.sort((a, b) => a.id - b.id);
+
+                tableBody.innerHTML = '';
+
+                createTable(sortedData);
+            }
+            
+
+        });  
+        
+    </script>
+
+</body>
+</html>

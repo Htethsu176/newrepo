@@ -1,0 +1,35 @@
+body{  
+    background-color: rgb(255, 255, 255); 
+    margin-left: 50px;
+    margin-right: 50px;
+} 
+h1 {
+    font-size: 30px;  
+    text-align: center;       
+}
+input{
+    border: 1px solid rgb(124, 122, 122);
+    height: 20px;
+    width: 300px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+table th {
+    background-color: rgb(167, 163, 163);
+    border: 1px solid rgb(255, 253, 253);
+}
+table td {
+    border: 1px solid rgb(163, 159, 159);
+    background-color: rgb(247, 245, 245);
+}
+table td:hover{
+    background: #dfdcdc;
+}
+th, td {  
+    padding: 10px; 
+    padding-left: 20px; 
+    padding-right: 20px;
+} 
